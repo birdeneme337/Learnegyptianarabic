@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dil Öğren - App Edition</title>
+    <title>Dil Öğren - Seviyeli App Edition</title>
     <style>
         * {
             box-sizing: border-box;
@@ -21,45 +21,47 @@
             padding: 15px;
         }
 
-        /* MOBİL UYGULAMA GÖVDESİ (APP CONTAINER) */
+        /* MOBİL UYGULAMA GÖVDESİ */
         .app-card {
             width: 100%;
             max-width: 480px;
+            height: 720px;
             background-color: #1e293b;
-            border-radius: 24px;
+            border-radius: 28px;
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
             overflow: hidden;
             display: flex;
             flex-direction: column;
             border: 1px solid #334155;
+            position: relative;
         }
 
         /* UYGULAMA ÜST BAR (HEADER) */
         .app-header {
             background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-            padding: 24px 20px;
+            padding: 20px;
             color: white;
+            flex-shrink: 0;
         }
 
         .header-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
 
         .app-title {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             font-weight: 700;
-            letter-spacing: -0.5px;
         }
 
         .lang-select {
             background: rgba(0, 0, 0, 0.25);
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: white;
-            padding: 6px 10px;
-            border-radius: 12px;
+            padding: 5px 8px;
+            border-radius: 10px;
             font-size: 0.85rem;
             outline: none;
             cursor: pointer;
@@ -70,111 +72,128 @@
             color: white;
         }
 
-        .app-desc {
-            font-size: 0.85rem;
-            color: #fecdd3;
-            line-height: 1.4;
+        /* KATEGORİ (SEVİYE) SEKMELERİ */
+        .level-tabs {
+            display: flex;
+            background-color: #0f172a;
+            padding: 6px;
+            gap: 6px;
+            border-bottom: 1px solid #334155;
+            flex-shrink: 0;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 8px 0;
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn.active {
+            background-color: #ef4444;
+            color: white;
+            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4);
         }
 
         /* İÇERİK ALANI */
         .app-content {
-            padding: 20px;
+            padding: 16px;
+            flex-grow: 1;
+            overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 20px;
-            overflow-y: auto;
+            gap: 16px;
         }
 
         .section-title {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: #94a3b8;
-            margin-bottom: 10px;
-            font-weight: 600;
+            color: #ef4444;
+            margin-bottom: 8px;
+            font-weight: 700;
         }
 
         /* KELİME KARTLARI */
         .word-list {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
         }
 
         .word-card {
             background-color: #0f172a;
             border: 1px solid #334155;
-            border-radius: 16px;
-            padding: 16px;
+            border-radius: 14px;
+            padding: 14px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: all 0.2s ease;
-        }
-
-        .word-card:active {
-            transform: scale(0.98);
         }
 
         .word-info {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 3px;
         }
 
         .main-text {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 600;
             color: #f8fafc;
         }
 
         .sub-text {
-            font-size: 0.88rem;
+            font-size: 0.85rem;
             color: #94a3b8;
         }
 
         .ar-font {
             font-family: 'Amiri', 'Traditional Arabic', serif;
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             direction: rtl;
         }
 
-        /* SES BUTONU (OYNATMA) */
+        /* SES BUTONU */
         .play-btn {
             background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
             border: none;
-            width: 44px;
-            height: 44px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.1rem;
+            font-size: 1rem;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
-            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
+            flex-shrink: 0;
         }
 
         .play-btn:active {
             transform: scale(0.9);
         }
 
-        /* MASAÜSTÜ UYUMU */
-        @media (min-width: 768px) {
-            body {
-                align-items: center;
-            }
-            .app-card {
-                height: 680px;
-            }
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
         }
     </style>
 </head>
 <body>
 
     <div class="app-card">
-        <!-- KIRMIZI MOBİL HEADER -->
+        <!-- HEADER -->
         <div class="app-header">
             <div class="header-top">
                 <div class="app-title" id="app-title">Mısır Arapçası & Türkçe</div>
@@ -184,73 +203,153 @@
                     <option value="en">🇬🇧 EN</option>
                 </select>
             </div>
-            <div class="app-desc" id="app-desc">Kelimenin yanındaki ses butonuna basarak doğal günlük konuşma seslendirmesini dinleyebilirsiniz.</div>
         </div>
 
-        <!-- UYGULAMA İÇERİĞİ -->
+        <!-- LEVEL TABS (A1 - A2 - B1 SEVİYELERİ) -->
+        <div class="level-tabs">
+            <button class="tab-btn active" onclick="switchTab('a1')">A1 Başlangıç</button>
+            <button class="tab-btn" onclick="switchTab('a2')">A2 Orta</button>
+            <button class="tab-btn" onclick="switchTab('b1')">B1 İleri</button>
+        </div>
+
+        <!-- İÇERİK ALANI -->
         <div class="app-content">
             
-            <!-- MISIR ARAPÇASI BÖLÜMÜ -->
-            <div>
-                <div class="section-title" id="sec-ar">Mısır Arapçası Öğren</div>
+            <!-- A1 SEVİYESİ -->
+            <div id="a1" class="tab-content active">
+                <div class="section-title">A1 Mısır Arapçası</div>
                 <div class="word-list">
-                    
                     <div class="word-card">
                         <div class="word-info">
                             <span class="main-text ar-font">إزيك؟ (Izayyakar)</span>
-                            <span class="sub-text" id="t-1">Nasılsın? (Erkeğe)</span>
+                            <span class="sub-text" id="a1-1">Nasılsın? (Erkeğe)</span>
                         </div>
                         <button class="play-btn" onclick="playVoice('إزيك؟', 'ar-EG')">🔊</button>
                     </div>
-
                     <div class="word-card">
                         <div class="word-info">
-                            <span class="main-text ar-font">عامل إيه؟ (Aamel eh?)</span>
-                            <span class="sub-text" id="t-2">Ne haber / Nasıl gidiyor?</span>
+                            <span class="main-text ar-font">شكراً (Shukran)</span>
+                            <span class="sub-text" id="a1-2">Teşekkürler</span>
                         </div>
-                        <button class="play-btn" onclick="playVoice('عامل إيه؟', 'ar-EG')">🔊</button>
+                        <button class="play-btn" onclick="playVoice('شكراً', 'ar-EG')">🔊</button>
                     </div>
-
                     <div class="word-card">
                         <div class="word-info">
-                            <span class="main-text ar-font">شكراً أوي (Shukran awy)</span>
-                            <span class="sub-text" id="t-3">Çok teşekkürler</span>
+                            <span class="main-text ar-font">أيوه (Aywa)</span>
+                            <span class="sub-text" id="a1-3">Evet</span>
                         </div>
-                        <button class="play-btn" onclick="playVoice('شكراً أوي', 'ar-EG')">🔊</button>
+                        <button class="play-btn" onclick="playVoice('أيوه', 'ar-EG')">🔊</button>
                     </div>
-
                 </div>
-            </div>
 
-            <!-- TÜRKÇE BÖLÜMÜ -->
-            <div>
-                <div class="section-title" id="sec-tr">Türkçe Öğren</div>
+                <div class="section-title" style="margin-top: 15px;">A1 Türkçe</div>
                 <div class="word-list">
-                    
                     <div class="word-card">
                         <div class="word-info">
                             <span class="main-text">Merhaba</span>
-                            <span class="sub-text ar-font" id="t-4">أهلاً / مرحبا</span>
+                            <span class="sub-text ar-font" id="a1-4">مرحبا</span>
                         </div>
                         <button class="play-btn" onclick="playVoice('Merhaba', 'tr-TR')">🔊</button>
                     </div>
-
                     <div class="word-card">
                         <div class="word-info">
-                            <span class="main-text">Nasılsınız?</span>
-                            <span class="sub-text ar-font" id="t-5">كيف حالكم؟</span>
+                            <span class="main-text">Evet / Hayır</span>
+                            <span class="sub-text ar-font" id="a1-5">نعم / لا</span>
                         </div>
-                        <button class="play-btn" onclick="playVoice('Nasılsınız?', 'tr-TR')">🔊</button>
+                        <button class="play-btn" onclick="playVoice('Evet, Hayır', 'tr-TR')">🔊</button>
                     </div>
+                </div>
+            </div>
 
+            <!-- A2 SEVİYESİ -->
+            <div id="a2" class="tab-content">
+                <div class="section-title">A2 Mısır Arapçası</div>
+                <div class="word-list">
                     <div class="word-card">
                         <div class="word-info">
-                            <span class="main-text">Teşekkür ederim</span>
-                            <span class="sub-text ar-font" id="t-6">شكراً لك</span>
+                            <span class="main-text ar-font">بكام ده؟ (Bikam da?)</span>
+                            <span class="sub-text" id="a2-1">Bu ne kadar?</span>
                         </div>
-                        <button class="play-btn" onclick="playVoice('Teşekkür ederim', 'tr-TR')">🔊</button>
+                        <button class="play-btn" onclick="playVoice('بكام ده؟', 'ar-EG')">🔊</button>
                     </div>
+                    <div class="word-card">
+                        <div class="word-info">
+                            <span class="main-text ar-font">مش فاهم (Mish fahem)</span>
+                            <span class="sub-text" id="a2-2">Anlamıyorum</span>
+                        </div>
+                        <button class="play-btn" onclick="playVoice('مش فاهم', 'ar-EG')">🔊</button>
+                    </div>
+                    <div class="word-card">
+                        <div class="word-info">
+                            <span class="main-text ar-font">عايز اروح... (Ayiz arooh)</span>
+                            <span class="sub-text" id="a2-3">...’ya gitmek istiyorum</span>
+                        </div>
+                        <button class="play-btn" onclick="playVoice('عايز اروح', 'ar-EG')">🔊</button>
+                    </div>
+                </div>
 
+                <div class="section-title" style="margin-top: 15px;">A2 Türkçe</div>
+                <div class="word-list">
+                    <div class="word-card">
+                        <div class="word-info">
+                            <span class="main-text">Saat kaç?</span>
+                            <span class="sub-text ar-font" id="a2-4">كم الساعة؟</span>
+                        </div>
+                        <button class="play-btn" onclick="playVoice('Saat kaç?', 'tr-TR')">🔊</button>
+                    </div>
+                    <div class="word-card">
+                        <div class="word-info">
+                            <span class="main-text">Neredesiniz?</span>
+                            <span class="sub-text ar-font" id="a2-5">أين أنتم؟</span>
+                        </div>
+                        <button class="play-btn" onclick="playVoice('Neredesiniz?', 'tr-TR')">🔊</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- B1 SEVİYESİ -->
+            <div id="b1" class="tab-content">
+                <div class="section-title">B1 Mısır Arapçası</div>
+                <div class="word-list">
+                    <div class="word-card">
+                        <div class="word-info">
+                            <span class="main-text ar-font">مفيش مشكلة (Mafeesh meshkela)</span>
+                            <span class="sub-text" id="b1-1">Problem değil / Sorun yok</span>
+                        </div>
+                        <button class="play-btn" onclick="playVoice('مفيش مشكلة', 'ar-EG')">🔊</button>
+                    </div>
+                    <div class="word-card">
+                        <div class="word-info">
+                            <span class="main-text ar-font">على فكرة (Ala fekra)</span>
+                            <span class="sub-text" id="b1-2">Bu arada / Aklıma gelmişken</span>
+                        </div>
+                        <button class="play-btn" onclick="playVoice('على فكرة', 'ar-EG')">🔊</button>
+                    </div>
+                    <div class="word-card">
+                        <div class="word-info">
+                            <span class="main-text ar-font">ربنا يخليك ( ربنا يخليك )</span>
+                            <span class="sub-text" id="b1-3">Allah seni korusun (Çok sağ ol)</span>
+                        </div>
+                        <button class="play-btn" onclick="playVoice('ربنا يخليك', 'ar-EG')">🔊</button>
+                    </div>
+                </div>
+
+                <div class="section-title" style="margin-top: 15px;">B1 Türkçe</div>
+                <div class="word-list">
+                    <div class="word-card">
+                        <div class="word-info">
+                            <span class="main-text">Kendine iyi bak</span>
+                            <span class="sub-text ar-font" id="b1-4">اعتني بنفسك</span>
+                        </div>
+                        <button class="play-btn" onclick="playVoice('Kendine iyi bak', 'tr-TR')">🔊</button>
+                    </div>
+                    <div class="word-card">
+                        <div class="word-info">
+                            <span class="main-text">Görüşmek üzere</span>
+                            <span class="sub-text ar-font" id="b1-5">إلى اللقاء</span>
+                        </div>
+                        <button class="play-btn" onclick="playVoice('Görüşmek üzere', 'tr-TR')">🔊</button>
+                    </div>
                 </div>
             </div>
 
@@ -258,7 +357,16 @@
     </div>
 
     <script>
-        // DOĞAL SESLİ OKUMA KODU
+        // SEKMELER ARASI GEÇİŞ (A1 - A2 - B1)
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        // SESLİ OKUMA MOTORU
         function playVoice(text, langCode) {
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
@@ -266,67 +374,53 @@
                 utterance.lang = langCode;
                 utterance.rate = 0.88;
                 window.speechSynthesis.speak(utterance);
-            } else {
-                alert("Cihazınız ses oynatmayı desteklemiyor.");
             }
         }
 
-        // 3 DİL DESTEĞİ METİNLERİ
+        // DİL ÇEVİRİ DESTEĞİ
         const translations = {
             tr: {
                 title: "Mısır Arapçası & Türkçe",
-                desc: "Kelimenin yanındaki ses butonuna basarak doğal günlük konuşma seslendirmesini dinleyebilirsiniz.",
-                secAr: "Mısır Arapçası Öğren",
-                secTr: "Türkçe Öğren",
-                t1: "Nasılsın? (Erkeğe)",
-                t2: "Ne haber / Nasıl gidiyor?",
-                t3: "Çok teşekkürler",
-                t4: "أهلاً / مرحبا",
-                t5: "كيف حالكم؟",
-                t6: "شكراً لك"
+                a1_1: "Nasılsın? (Erkeğe)", a1_2: "Teşekkürler", a1_3: "Evet", a1_4: "مرحبا", a1_5: "نعم / لا",
+                a2_1: "Bu ne kadar?", a2_2: "Anlamıyorum", a2_3: "...’ya gitmek istiyorum", a2_4: "كم الساعة؟", a2_5: "أين أنتم؟",
+                b1_1: "Problem değil / Sorun yok", b1_2: "Bu arada", b1_3: "Allah seni korusun", b1_4: "اعتني بنفسك", b1_5: "إلى اللقاء"
             },
             ar: {
                 title: "تعلم العربية والتركية",
-                desc: "يمكنك الاستماع إلى النطق الطبيعي اليومي عن طريق الضغط على زر الصوت بجانب الكلمة.",
-                secAr: "تعلم العربية المصرية",
-                secTr: "تعلم اللغة التركية",
-                t1: "كيف حالك؟",
-                t2: "ما الأخبار؟",
-                t3: "شكراً جزيلاً",
-                t4: "Merhaba",
-                t5: "Nasılsınız?",
-                t6: "Teşekkür ederim"
+                a1_1: "كيف حالك؟", a1_1_sub: "Nasılsın?", a1_2: "شكراً", a1_3: "نعم", a1_4: "Merhaba", a1_5: "Evet / Hayır",
+                a2_1: "كم سعر هذا؟", a2_2: "لا أفهم", a2_3: "أريد الذهاب إلى...", a2_4: "Saat kaç?", a2_5: "Neredesiniz?",
+                b1_1: "لا مشكلة", b1_2: "بالمناسبة", b1_3: "حفظك الله", b1_4: "Kendine iyi bak", b1_5: "Görüşmek üzere"
             },
             en: {
                 title: "Learn Egyptian Arabic & Turkish",
-                desc: "Click the sound button next to the word to listen to natural daily pronunciation.",
-                secAr: "Learn Egyptian Arabic",
-                secTr: "Learn Turkish",
-                t1: "How are you? (Male)",
-                t2: "What's up?",
-                t3: "Thank you very much",
-                t4: "Hello / Welcome",
-                t5: "How are you? (Formal)",
-                t6: "Thank you"
+                a1_1: "How are you? (Male)", a1_2: "Thanks", a1_3: "Yes", a1_4: "Hello", a1_5: "Yes / No",
+                a2_1: "How much is this?", a2_2: "I don't understand", a2_3: "I want to go to...", a2_4: "What time is it?", a2_5: "Where are you?",
+                b1_1: "No problem", b1_2: "By the way", b1_3: "God bless you", b1_4: "Take care", b1_5: "See you soon"
             }
         };
 
-        // DİL DEĞİŞTİRME FONKSİYONU
         function changeLanguage() {
             const selected = document.getElementById('lang-select').value;
             const data = translations[selected];
 
             document.getElementById('app-title').innerText = data.title;
-            document.getElementById('app-desc').innerText = data.desc;
-            document.getElementById('sec-ar').innerText = data.secAr;
-            document.getElementById('sec-tr').innerText = data.secTr;
+            document.getElementById('a1-1').innerText = data.a1_1;
+            document.getElementById('a1-2').innerText = data.a1_2;
+            document.getElementById('a1-3').innerText = data.a1_3;
+            document.getElementById('a1-4').innerText = data.a1_4;
+            document.getElementById('a1-5').innerText = data.a1_5;
 
-            document.getElementById('t-1').innerText = data.t1;
-            document.getElementById('t-2').innerText = data.t2;
-            document.getElementById('t-3').innerText = data.t3;
-            document.getElementById('t-4').innerText = data.t4;
-            document.getElementById('t-5').innerText = data.t5;
-            document.getElementById('t-6').innerText = data.t6;
+            document.getElementById('a2-1').innerText = data.a2_1;
+            document.getElementById('a2-2').innerText = data.a2_2;
+            document.getElementById('a2-3').innerText = data.a2_3;
+            document.getElementById('a2-4').innerText = data.a2_4;
+            document.getElementById('a2-5').innerText = data.a2_5;
+
+            document.getElementById('b1-1').innerText = data.b1_1;
+            document.getElementById('b1-2').innerText = data.b1_2;
+            document.getElementById('b1-3').innerText = data.b1_3;
+            document.getElementById('b1-4').innerText = data.b1_4;
+            document.getElementById('b1-5').innerText = data.b1_5;
         }
     </script>
 </body>
