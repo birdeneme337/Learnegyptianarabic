@@ -3,397 +3,331 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mısır Arapçası Öğren</title>
+    <title>Dil Öğren - App Edition</title>
     <style>
-        :root {
-            --bg-color: #f4f7f6;
-            --card-bg: #ffffff;
-            --primary-color: #ce1126; /* Mısır Bayrağı Kırmızısı */
-            --secondary-color: #000000;
-            --accent-color: #c09300; /* Altın Sarısı */
-            --text-color: #333;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 20px;
+            background-color: #0f172a;
+            color: #f8fafc;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        h1 { margin-bottom: 10px; }
-
-        .container {
-            width: 100%;
-            max-width: 600px;
-        }
-
-        .tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .tab-btn {
-            flex: 1;
-            padding: 12px;
-            border: none;
-            background-color: #ddd;
-            cursor: pointer;
-            font-weight: bold;
-            border-radius: 8px;
-            transition: 0.3s;
-        }
-
-        .tab-btn.active {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        .section {
-            display: none;
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        .section.active { display: block; }
-
-        /* Form Bilesenleri */
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        input {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 16px;
-        }
-
-        .arabic-input {
-            direction: rtl;
-            font-size: 18px;
-        }
-
-        button.action-btn {
-            padding: 12px;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-        }
-
-        button.action-btn:hover { opacity: 0.9; }
-
-        /* Kelime Kartlari */
-        .flashcard {
-            width: 100%;
-            height: 200px;
-            perspective: 1000px;
-            cursor: pointer;
-            margin-bottom: 15px;
-        }
-
-        .flashcard-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            border-radius: 12px;
-        }
-
-        .flashcard.flipped .flashcard-inner {
-            transform: rotateY(180deg);
-        }
-
-        .flashcard-front, .flashcard-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            display: flex;
-            flex-direction: column;
             justify-content: center;
-            align-items: center;
-            border-radius: 12px;
-            padding: 20px;
-            box-sizing: border-box;
-            background-color: var(--card-bg);
-            border: 2px solid var(--accent-color);
+            min-height: 100vh;
+            padding: 15px;
         }
 
-        .flashcard-front { font-size: 28px; font-weight: bold; }
-        .flashcard-back { transform: rotateY(180deg); font-size: 22px; background-color: #fff9e6; }
-        .phonetic { font-size: 16px; color: #666; margin-top: 5px; }
+        /* MOBİL UYGULAMA GÖVDESİ (APP CONTAINER) */
+        .app-card {
+            width: 100%;
+            max-width: 480px;
+            background-color: #1e293b;
+            border-radius: 24px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #334155;
+        }
 
-        .card-controls {
+        /* UYGULAMA ÜST BAR (HEADER) */
+        .app-header {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            padding: 24px 20px;
+            color: white;
+        }
+
+        .header-top {
             display: flex;
             justify-content: space-between;
-            gap: 10px;
+            align-items: center;
+            margin-bottom: 12px;
         }
 
-        /* Liste */
-        .word-list {
-            list-style: none;
-            padding: 0;
-            max-height: 300px;
+        .app-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .lang-select {
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 6px 10px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .lang-select option {
+            background-color: #1e293b;
+            color: white;
+        }
+
+        .app-desc {
+            font-size: 0.85rem;
+            color: #fecdd3;
+            line-height: 1.4;
+        }
+
+        /* İÇERİK ALANI */
+        .app-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
             overflow-y: auto;
         }
 
-        .word-item {
+        .section-title {
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #94a3b8;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        /* KELİME KARTLARI */
+        .word-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .word-card {
+            background-color: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 16px;
+            padding: 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px;
-            border-bottom: 1px solid #eee;
+            transition: all 0.2s ease;
         }
 
-        .delete-btn {
-            background-color: #ff4d4d;
-            color: white;
+        .word-card:active {
+            transform: scale(0.98);
+        }
+
+        .word-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .main-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #f8fafc;
+        }
+
+        .sub-text {
+            font-size: 0.88rem;
+            color: #94a3b8;
+        }
+
+        .ar-font {
+            font-family: 'Amiri', 'Traditional Arabic', serif;
+            font-size: 1.3rem;
+            direction: rtl;
+        }
+
+        /* SES BUTONU (OYNATMA) */
+        .play-btn {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
             border: none;
-            padding: 5px 10px;
-            border-radius: 4px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
             cursor: pointer;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        /* Oyun Sekmesi */
-        .game-option {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            margin: 8px 0;
-            background: #f0f0f0;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            cursor: pointer;
-            text-align: left;
+        .play-btn:active {
+            transform: scale(0.9);
         }
-        .game-option:hover { background: #e0e0e0; }
-        .score-board { font-weight: bold; margin-bottom: 15px; }
+
+        /* MASAÜSTÜ UYUMU */
+        @media (min-width: 768px) {
+            body {
+                align-items: center;
+            }
+            .app-card {
+                height: 680px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <h1>Mısır Arapçası Öğren 🇪🇬</h1>
-
-    <div class="container">
-        <!-- Sekme Butonlari -->
-        <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('add-tab')">Ekle & Liste</button>
-            <button class="tab-btn" onclick="switchTab('cards-tab')">Kartlar</button>
-            <button class="tab-btn" onclick="switchTab('game-tab')">Oyun</button>
+    <div class="app-card">
+        <!-- KIRMIZI MOBİL HEADER -->
+        <div class="app-header">
+            <div class="header-top">
+                <div class="app-title" id="app-title">Mısır Arapçası & Türkçe</div>
+                <select class="lang-select" id="lang-select" onchange="changeLanguage()">
+                    <option value="tr" selected>🇹🇷 TR</option>
+                    <option value="ar">🇪🇬 AR</option>
+                    <option value="en">🇬🇧 EN</option>
+                </select>
+            </div>
+            <div class="app-desc" id="app-desc">Kelimenin yanındaki ses butonuna basarak doğal günlük konuşma seslendirmesini dinleyebilirsiniz.</div>
         </div>
 
-        <!-- 1. Ekle ve Liste Sekmesi -->
-        <div id="add-tab" class="section active">
-            <h3>Yeni Kelime/Cümle Ekle</h3>
-            <form id="add-form">
-                <input type="text" id="ar-text" class="arabic-input" placeholder="Arapçası (ör: إزيك)" required>
-                <input type="text" id="read-text" placeholder="Okunuşu (ör: Izzayyak)" required>
-                <input type="text" id="tr-text" placeholder="Türkçe Anlamı (ör: Nasılsın?)" required>
-                <button type="submit" class="action-btn">Kaydet</button>
-            </form>
-
-            <h3 style="margin-top: 30px;">Kayıtlı Kelimeler (<span id="word-count">0</span>)</h3>
-            <ul id="word-list" class="word-list"></ul>
-        </div>
-
-        <!-- 2. Kelime Kartlari Sekmesi -->
-        <div id="cards-tab" class="section">
-            <div id="card-container">
-                <div class="flashcard" onclick="this.classList.toggle('flipped')">
-                    <div class="flashcard-inner">
-                        <div class="flashcard-front">
-                            <span id="card-ar">-</span>
-                            <span id="card-read" class="phonetic">-</span>
+        <!-- UYGULAMA İÇERİĞİ -->
+        <div class="app-content">
+            
+            <!-- MISIR ARAPÇASI BÖLÜMÜ -->
+            <div>
+                <div class="section-title" id="sec-ar">Mısır Arapçası Öğren</div>
+                <div class="word-list">
+                    
+                    <div class="word-card">
+                        <div class="word-info">
+                            <span class="main-text ar-font">إزيك؟ (Izayyakar)</span>
+                            <span class="sub-text" id="t-1">Nasılsın? (Erkeğe)</span>
                         </div>
-                        <div class="flashcard-back">
-                            <span id="card-tr">-</span>
-                        </div>
+                        <button class="play-btn" onclick="playVoice('إزيك؟', 'ar-EG')">🔊</button>
                     </div>
-                </div>
-                <div class="card-controls">
-                    <button class="action-btn" onclick="prevCard()">Önceki</button>
-                    <button class="action-btn" onclick="nextCard()">Sonraki</button>
-                </div>
-            </div>
-        </div>
 
-        <!-- 3. Oyun Sekmesi -->
-        <div id="game-tab" class="section">
-            <div class="score-board">Puan: <span id="score">0</span></div>
-            <div id="game-container">
-                <p>Aşağıdaki Mısır Arapçası ifadenin Türkçe karşılığı nedir?</p>
-                <h2 id="game-question" class="arabic-input" style="text-align: center;">-</h2>
-                <div id="game-options"></div>
+                    <div class="word-card">
+                        <div class="word-info">
+                            <span class="main-text ar-font">عامل إيه؟ (Aamel eh?)</span>
+                            <span class="sub-text" id="t-2">Ne haber / Nasıl gidiyor?</span>
+                        </div>
+                        <button class="play-btn" onclick="playVoice('عامل إيه؟', 'ar-EG')">🔊</button>
+                    </div>
+
+                    <div class="word-card">
+                        <div class="word-info">
+                            <span class="main-text ar-font">شكراً أوي (Shukran awy)</span>
+                            <span class="sub-text" id="t-3">Çok teşekkürler</span>
+                        </div>
+                        <button class="play-btn" onclick="playVoice('شكراً أوي', 'ar-EG')">🔊</button>
+                    </div>
+
+                </div>
             </div>
+
+            <!-- TÜRKÇE BÖLÜMÜ -->
+            <div>
+                <div class="section-title" id="sec-tr">Türkçe Öğren</div>
+                <div class="word-list">
+                    
+                    <div class="word-card">
+                        <div class="word-info">
+                            <span class="main-text">Merhaba</span>
+                            <span class="sub-text ar-font" id="t-4">أهلاً / مرحبا</span>
+                        </div>
+                        <button class="play-btn" onclick="playVoice('Merhaba', 'tr-TR')">🔊</button>
+                    </div>
+
+                    <div class="word-card">
+                        <div class="word-info">
+                            <span class="main-text">Nasılsınız?</span>
+                            <span class="sub-text ar-font" id="t-5">كيف حالكم؟</span>
+                        </div>
+                        <button class="play-btn" onclick="playVoice('Nasılsınız?', 'tr-TR')">🔊</button>
+                    </div>
+
+                    <div class="word-card">
+                        <div class="word-info">
+                            <span class="main-text">Teşekkür ederim</span>
+                            <span class="sub-text ar-font" id="t-6">شكراً لك</span>
+                        </div>
+                        <button class="play-btn" onclick="playVoice('Teşekkür ederim', 'tr-TR')">🔊</button>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
     </div>
 
     <script>
-        // Baslangic verileri (Varsayilan Misir Arapcasi Kelimeler)
-        const defaultWords = [
-            { ar: "إزيك", read: "Izzayyak", tr: "Nasılsın? (Erkeğe)" },
-            { ar: "عامل إيه", read: "Amil eh", tr: "Ne haber? / Ne yapıyorsun?" },
-            { ar: "كويس", read: "Koyyis", tr: "İyiyim" },
-            { ar: "شُكراً", read: "Shukran", tr: "Teşekkürler" },
-            { ar: "عايز", read: "Ayiz", tr: "İstiyorum (Erkek)" }
-        ];
-
-        let words = JSON.parse(localStorage.getItem('egyptianWords')) || defaultWords;
-        let currentCardIndex = 0;
-        let score = 0;
-        let currentGameCorrectAnswer = "";
-
-        // Verileri kaydet
-        function saveWords() {
-            localStorage.setItem('egyptianWords', JSON.stringify(words));
-            updateWordList();
-        }
-
-        // Sekme degistirme
-        function switchTab(tabId) {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            
-            document.getElementById(tabId).classList.add('active');
-            event.target.classList.add('active');
-
-            if (tabId === 'cards-tab') showCard(currentCardIndex);
-            if (tabId === 'game-tab') startNewGameRound();
-        }
-
-        // Form Gönderimi (Yeni Kelime Ekleme)
-        document.getElementById('add-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const ar = document.getElementById('ar-text').value;
-            const read = document.getElementById('read-text').value;
-            const tr = document.getElementById('tr-text').value;
-
-            words.push({ ar, read, tr });
-            saveWords();
-
-            this.reset();
-            alert('Kelime başarıyla eklendi!');
-        });
-
-        // Liste Güncelleme
-        function updateWordList() {
-            const listEl = document.getElementById('word-list');
-            listEl.innerHTML = '';
-            document.getElementById('word-count').innerText = words.length;
-
-            words.forEach((item, index) => {
-                const li = document.createElement('li');
-                li.className = 'word-item';
-                li.innerHTML = `
-                    <div>
-                        <strong>${item.ar}</strong> (${item.read}) - ${item.tr}
-                    </div>
-                    <button class="delete-btn" onclick="deleteWord(${index})">Sil</button>
-                `;
-                listEl.appendChild(li);
-            });
-        }
-
-        function deleteWord(index) {
-            words.splice(index, 1);
-            saveWords();
-        }
-
-        // Kelime Kartlari
-        function showCard(index) {
-            if (words.length === 0) {
-                document.getElementById('card-ar').innerText = "Kelime yok";
-                document.getElementById('card-read').innerText = "";
-                document.getElementById('card-tr').innerText = "Lütfen kelime ekleyin.";
-                return;
-            }
-            const card = words[index];
-            document.getElementById('card-ar').innerText = card.ar;
-            document.getElementById('card-read').innerText = card.read;
-            document.getElementById('card-tr').innerText = card.tr;
-            
-            // Kart cevrilmisse sifirla
-            document.querySelector('.flashcard').classList.remove('flipped');
-        }
-
-        function nextCard() {
-            if (words.length === 0) return;
-            currentCardIndex = (currentCardIndex + 1) % words.length;
-            showCard(currentCardIndex);
-        }
-
-        function prevCard() {
-            if (words.length === 0) return;
-            currentCardIndex = (currentCardIndex - 1 + words.length) % words.length;
-            showCard(currentCardIndex);
-        }
-
-        // Oyun Modu (Coktan Seçmeli Test)
-        function startNewGameRound() {
-            if (words.length < 2) {
-                document.getElementById('game-container').innerHTML = "<p>Oyun oynamak için en az 2 kelime eklemelisiniz.</p>";
-                return;
-            }
-
-            const randomWord = words[Math.floor(Math.random() * words.length)];
-            currentGameCorrectAnswer = randomWord.tr;
-
-            document.getElementById('game-question').innerText = `${randomWord.ar} (${randomWord.read})`;
-
-            // Seçenekleri hazirla (1 dogru, 2 rastgele yanlis)
-            let options = [randomWord.tr];
-            while (options.length < Math.min(3, words.length)) {
-                let randomOption = words[Math.floor(Math.random() * words.length)].tr;
-                if (!options.includes(randomOption)) {
-                    options.push(randomOption);
-                }
-            }
-
-            // Seçenekleri karistir
-            options.sort(() => Math.random() - 0.5);
-
-            const optionsContainer = document.getElementById('game-options');
-            optionsContainer.innerHTML = '';
-            options.forEach(opt => {
-                const btn = document.createElement('button');
-                btn.className = 'game-option';
-                btn.innerText = opt;
-                btn.onclick = () => checkAnswer(opt);
-                optionsContainer.appendChild(btn);
-            });
-        }
-
-        function checkAnswer(selected) {
-            if (selected === currentGameCorrectAnswer) {
-                score += 10;
-                alert('Tebrikler! Doğru cevap.');
+        // DOĞAL SESLİ OKUMA KODU
+        function playVoice(text, langCode) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = langCode;
+                utterance.rate = 0.88;
+                window.speechSynthesis.speak(utterance);
             } else {
-                alert(`Yanlış! Doğru cevap: ${currentGameCorrectAnswer}`);
+                alert("Cihazınız ses oynatmayı desteklemiyor.");
             }
-            document.getElementById('score').innerText = score;
-            startNewGameRound();
         }
 
-        // Sayfa yuklendiginde listeyi doldur
-        updateWordList();
+        // 3 DİL DESTEĞİ METİNLERİ
+        const translations = {
+            tr: {
+                title: "Mısır Arapçası & Türkçe",
+                desc: "Kelimenin yanındaki ses butonuna basarak doğal günlük konuşma seslendirmesini dinleyebilirsiniz.",
+                secAr: "Mısır Arapçası Öğren",
+                secTr: "Türkçe Öğren",
+                t1: "Nasılsın? (Erkeğe)",
+                t2: "Ne haber / Nasıl gidiyor?",
+                t3: "Çok teşekkürler",
+                t4: "أهلاً / مرحبا",
+                t5: "كيف حالكم؟",
+                t6: "شكراً لك"
+            },
+            ar: {
+                title: "تعلم العربية والتركية",
+                desc: "يمكنك الاستماع إلى النطق الطبيعي اليومي عن طريق الضغط على زر الصوت بجانب الكلمة.",
+                secAr: "تعلم العربية المصرية",
+                secTr: "تعلم اللغة التركية",
+                t1: "كيف حالك؟",
+                t2: "ما الأخبار؟",
+                t3: "شكراً جزيلاً",
+                t4: "Merhaba",
+                t5: "Nasılsınız?",
+                t6: "Teşekkür ederim"
+            },
+            en: {
+                title: "Learn Egyptian Arabic & Turkish",
+                desc: "Click the sound button next to the word to listen to natural daily pronunciation.",
+                secAr: "Learn Egyptian Arabic",
+                secTr: "Learn Turkish",
+                t1: "How are you? (Male)",
+                t2: "What's up?",
+                t3: "Thank you very much",
+                t4: "Hello / Welcome",
+                t5: "How are you? (Formal)",
+                t6: "Thank you"
+            }
+        };
+
+        // DİL DEĞİŞTİRME FONKSİYONU
+        function changeLanguage() {
+            const selected = document.getElementById('lang-select').value;
+            const data = translations[selected];
+
+            document.getElementById('app-title').innerText = data.title;
+            document.getElementById('app-desc').innerText = data.desc;
+            document.getElementById('sec-ar').innerText = data.secAr;
+            document.getElementById('sec-tr').innerText = data.secTr;
+
+            document.getElementById('t-1').innerText = data.t1;
+            document.getElementById('t-2').innerText = data.t2;
+            document.getElementById('t-3').innerText = data.t3;
+            document.getElementById('t-4').innerText = data.t4;
+            document.getElementById('t-5').innerText = data.t5;
+            document.getElementById('t-6').innerText = data.t6;
+        }
     </script>
 </body>
 </html>
